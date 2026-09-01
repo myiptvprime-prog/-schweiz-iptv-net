@@ -1,0 +1,28 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { deFaq } from "../data/de";
+import "../styles/global.css";
+---
+
+<BaseLayout title="FAQ IPTV Schweiz | Fragen zu Abo, Geräten und Support" description="Antworten auf häufige Fragen zu IPTV Schweiz: Abo, Smart TV, Android, iOS, Replay, VOD, Support 24/7 und 48h Garantie." canonical="/faq/" lang="de-CH">
+  <Header />
+  <main>
+    <section class="page-hero">
+      <p class="eyebrow">FAQ IPTV Schweiz</p>
+      <h1>Häufige Fragen zum IPTV Abo in der Schweiz</h1>
+    </section>
+    <section class="section faq">
+      <div class="faq-list">
+        {deFaq.map((item, index) => (
+          <details open={index === 0}>
+            <summary>{item.q}</summary>
+            <p>{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

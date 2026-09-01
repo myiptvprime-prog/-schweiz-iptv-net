@@ -1,0 +1,32 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site";
+import "../styles/global.css";
+---
+
+<BaseLayout title="IPTV legal Schweiz | Worauf Sie vor einem Abo achten" description="IPTV legal in der Schweiz verstehen: Rechte, Sender, Transparenz, Abo-Bedingungen und wichtige Prüfpunkte vor dem Kauf." canonical="/iptv-legal-schweiz/" lang="de-CH">
+  <Header />
+  <main>
+    <section class="page-hero">
+      <p class="eyebrow">IPTV legal Schweiz</p>
+      <h1>IPTV legal in der Schweiz: Punkte vor dem Abo prüfen</h1>
+      <p>Ein seriöses IPTV Angebot sollte Bedingungen, Grenzen, kompatible Geräte und Verfügbarkeit der Inhalte klar erklären.</p>
+      <a class="button primary" href={site.whatsappUrl}>Frage stellen</a>
+    </section>
+    <section class="section proof">
+      <div>
+        <h2>Rechte, Transparenz und Support prüfen</h2>
+        <p>Sender, Sportpakete, Filme und Serien müssen im Rahmen der geltenden Rechte angeboten werden. Prüfen Sie vor einem Abo die Bedingungen, Kompatibilität und Angaben zur Verfügbarkeit.</p>
+      </div>
+      <ul class="checklist">
+        <li>Klare Abo-Bedingungen</li>
+        <li>Sichtbare Kontaktmöglichkeiten</li>
+        <li>Support vor und nach der Aktivierung</li>
+        <li>Keine garantierten Inhalte ohne Prüfung</li>
+      </ul>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,77 @@
+---
+import { reviews } from "../data/site";
+import { deReviews } from "../data/de";
+
+const isDe = !Astro.url.pathname.startsWith("/fr/");
+const activeReviews = isDe ? deReviews : reviews;
+---
+
+<section class="section reviews" aria-labelledby="reviews-title">
+  <div class="reviews-header">
+    <div>
+      <p class="eyebrow">{isDe ? "Kundenbewertungen" : "Avis clients"}</p>
+      <h2 id="reviews-title">{isDe ? "Was unsere Kunden sagen" : "Ce que disent nos clients"}</h2>
+    </div>
+    <div class="rating-summary">
+      <strong>4.9 / 5</strong>
+      <span>{isDe ? "Gesamtbewertung" : "Note globale"}</span>
+    </div>
+  </div>
+
+  <div class="review-shell" data-review-carousel>
+    <button class="review-arrow" type="button" aria-label={isDe ? "Vorherige Bewertungen" : "Avis précédents"} data-review-prev>‹</button>
+    <div class="review-window">
+      <div class="review-track" data-review-track>
+        {activeReviews.map((review) => (
+          <article class="review-card">
+            <div class="stars" aria-label={isDe ? "5 Sterne" : "5 étoiles"}>★★★★★</div>
+            <h3>{review.name}</h3>
+            <p class="review-date">{review.date}</p>
+            <p>{review.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+    <button class="review-arrow" type="button" aria-label={isDe ? "Nächste Bewertungen" : "Avis suivants"} data-review-next>›</button>
+  </div>
+</section>
+
+<script>
+  const root = document.querySelector("[data-review-carousel]");
+  if (root) {
+    const track = root.querySelector("[data-review-track]");
+    const prev = root.querySelector("[data-review-prev]");
+    const next = root.querySelector("[data-review-next]");
+    if (!(track instanceof HTMLElement) || !(prev instanceof HTMLButtonElement) || !(next instanceof HTMLButtonElement)) {
+      throw new Error("Review carousel elements are missing.");
+    }
+    const total = track.children.length;
+    let index = 0;
+    const getVisible = () => {
+      if (window.matchMedia("(max-width: 640px)").matches) return 1;
+      if (window.matchMedia("(max-width: 980px)").matches) return 2;
+      return 3;
+    };
+    const getMaxIndex = () => Math.max(0, total - getVisible());
+    const update = () => {
+      const maxIndex = getMaxIndex();
+      const card = track.querySelector(".review-card");
+      const gap = 18;
+      index = Math.min(index, maxIndex);
+      const cardWidth = card instanceof HTMLElement ? card.offsetWidth : 0;
+      track.style.transform = `translateX(-${index * (cardWidth + gap)}px)`;
+      prev.disabled = index === 0;
+      next.disabled = index === maxIndex;
+    };
+    prev.addEventListener("click", () => {
+      index = Math.max(0, index - 1);
+      update();
+    });
+    next.addEventListener("click", () => {
+      index = Math.min(getMaxIndex(), index + 1);
+      update();
+    });
+    window.addEventListener("resize", update);
+    update();
+  }
+</script>

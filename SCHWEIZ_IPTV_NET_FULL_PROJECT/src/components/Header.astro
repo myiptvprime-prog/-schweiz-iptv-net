@@ -1,0 +1,27 @@
+---
+import { nav, site } from "../data/site";
+import { deNav } from "../data/de";
+import { localizedPath } from "../data/routes";
+
+const isDe = !Astro.url.pathname.startsWith("/fr/");
+const activeNav = isDe ? deNav : nav;
+const frHref = localizedPath(Astro.url.pathname, "fr");
+const deHref = localizedPath(Astro.url.pathname, "de");
+const homePath = isDe ? "/" : "/fr/";
+const isHome = Astro.url.pathname === homePath;
+const navHref = (href: string) => (href.startsWith("#") && !isHome ? `${homePath}${href}` : href);
+---
+
+<header class="site-header">
+  <a class="brand" href={isDe ? "/" : "/fr/"} aria-label={`${site.name} ${isDe ? "Startseite" : "accueil"}`}>
+    <img src="/logo-new.svg" alt={isDe ? "Logo Schweiz IPTV fuer IPTV Schweiz Abos" : "Logo Schweiz IPTV pour abonnement IPTV Suisse"} />
+  </a>
+  <div class="language-switch" aria-label={isDe ? "Sprache wählen" : "Choisir la langue"}>
+    <a href={frHref} class:list={{ active: !isDe }} hreflang="fr-CH" lang="fr">FR</a>
+    <span aria-hidden="true">|</span>
+    <a href={deHref} class:list={{ active: isDe }} hreflang="de-CH" lang="de">DE</a>
+  </div>
+  <nav class="nav" aria-label={isDe ? "Hauptnavigation" : "Navigation principale"}>
+    {activeNav.map(([label, href]) => <a href={navHref(href)}>{label}</a>)}
+  </nav>
+</header>

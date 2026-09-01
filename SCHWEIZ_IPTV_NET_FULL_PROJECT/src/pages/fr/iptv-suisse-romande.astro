@@ -1,0 +1,20 @@
+---
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { site } from "../../data/site";
+import "../../styles/global.css";
+---
+
+<BaseLayout title="IPTV Suisse romande | Service IPTV en français" description="IPTV Suisse romande avec support en français pour Genève, Lausanne, Fribourg, Neuchâtel, Vaud, Valais et Jura.">
+  <Header />
+  <main>
+    <section class="page-hero">
+      <p class="eyebrow">IPTV Suisse romande</p>
+      <h1>Service IPTV en français pour la Suisse romande</h1>
+      <p>Un accompagnement en français pour les utilisateurs de Genève, Lausanne, Vaud, Fribourg, Neuchâtel, Valais, Jura et toute la Suisse.</p>
+      <a class="button primary" href={site.whatsappUrl}>Contacter le support</a>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

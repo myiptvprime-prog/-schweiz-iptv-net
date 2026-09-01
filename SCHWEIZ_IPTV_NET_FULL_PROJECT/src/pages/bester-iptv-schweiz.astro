@@ -1,0 +1,20 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site";
+import "../styles/global.css";
+---
+
+<BaseLayout title="Bester IPTV Schweiz | Vergleich vor dem Abo" description="So wählen Sie den besten IPTV Anbieter Schweiz: Stabilität, Support 24/7, Smart TV Kompatibilität, Replay, VOD, CHF Preis und Garantie." canonical="/bester-iptv-schweiz/" lang="de-CH">
+  <Header />
+  <main>
+    <section class="page-hero">
+      <p class="eyebrow">Bester IPTV Schweiz</p>
+      <h1>Wie Sie den besten IPTV Anbieter Schweiz für Ihr Zuhause wählen</h1>
+      <p>Der beste Anbieter ist nicht nur der mit der grössten Senderzahl. Vergleichen Sie Stabilität, Support, Kompatibilität, Replay, VOD, Preis und Transparenz.</p>
+      <a class="button primary" href={site.whatsappUrl}>Bedarf vergleichen</a>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
