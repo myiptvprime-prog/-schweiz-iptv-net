@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Schweiz IPTV">
-  <rect width="64" height="64" rx="12" fill="#e30613"/>
-  <path d="M18 17h28a5 5 0 0 1 5 5v18a5 5 0 0 1-5 5H18a5 5 0 0 1-5-5V22a5 5 0 0 1 5-5Z" fill="#fff"/>
-  <path d="M29 24h6v7h7v6h-7v7h-6v-7h-7v-6h7v-7Z" fill="#e30613"/>
-  <path d="M25 50h14v4H25z" fill="#fff"/>
-</svg>
