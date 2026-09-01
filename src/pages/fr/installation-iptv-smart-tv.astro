@@ -1,0 +1,29 @@
+---
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { devices, site } from "../../data/site";
+---
+
+<BaseLayout title="Installation IPTV Suisse | Guide Smart TV, Android, iOS, Fire TV" description="Guide d'installation IPTV Suisse pour Smart TV, Android, iOS, Windows, Fire TV et boîtier IPTV avec support WhatsApp 24/7.">
+  <Header />
+  <main>
+    <section class="page-hero">
+      <p class="eyebrow">Installation IPTV Smart TV</p>
+      <h1>Installer IPTV sur Smart TV, Android, iOS, Windows et Fire TV</h1>
+      <p>Avant l'activation, nous verifions l'appareil, l'application IPTV compatible et votre connexion afin de limiter les coupures.</p>
+      <a class="button primary" href={site.whatsappUrl}>Recevoir le guide</a>
+    </section>
+    <section class="section devices">
+      <div class="device-list">
+        {devices.map((device) => <span>{device}</span>)}
+      </div>
+      <div class="steps">
+        <article><strong>1</strong><h2>Installer l'application</h2><p>Choisissez une application IPTV compatible avec votre appareil.</p></article>
+        <article><strong>2</strong><h2>Ajouter l'abonnement</h2><p>Utilisez les informations transmises apres activation.</p></article>
+        <article><strong>3</strong><h2>Tester la lecture</h2><p>Controlez la stabilite en HD/FHD/4K selon votre connexion.</p></article>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

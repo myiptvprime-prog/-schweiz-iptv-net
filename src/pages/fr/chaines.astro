@@ -1,0 +1,32 @@
+---
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { channelGroups, site } from "../../data/site";
+---
+
+<BaseLayout title="Chaînes IPTV Suisse | Replay, VOD et catégories disponibles" description="Découvrez les catégories de chaînes IPTV Suisse: Suisse romande, France, sport, cinéma, enfants, documentaires, info, replay et VOD selon abonnement.">
+  <Header />
+  <main>
+    <section class="page-hero">
+      <p class="eyebrow">Chaînes IPTV Suisse</p>
+      <h1>Chaînes, replay et VOD pour votre abonnement IPTV Suisse</h1>
+      <p>Un bon catalogue IPTV doit être lisible, stable et utile. Nous organisons les chaînes par pays, langue et usage pour vous aider à vérifier rapidement si l'offre correspond à vos habitudes.</p>
+      <a class="button primary" href={site.whatsappUrl}>Vérifier une chaîne</a>
+    </section>
+    <section class="section channels">
+      <div class="channel-grid large">
+        {channelGroups.map(([title, text]) => (
+          <article>
+            <h2>{title}</h2>
+            <p>{text}</p>
+          </article>
+        ))}
+      </div>
+      <div class="notice">
+        Les chaînes, bouquets, contenus sportifs, replay et VOD peuvent varier selon abonnement, disponibilité technique et droits de diffusion applicables.
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

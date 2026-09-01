@@ -1,0 +1,14 @@
+---
+import DeviceGuide from "../../components/DeviceGuide.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="IPTV iOS et tvOS Suisse | iPhone, iPad et Apple TV" description="Utiliser un abonnement IPTV Suisse sur iPhone, iPad et Apple TV avec support d'installation en français et abonnement en CHF.">
+  <Header />
+  <main>
+    <DeviceGuide eyebrow="IPTV iOS / tvOS" title="IPTV sur iPhone, iPad et Apple TV en Suisse" description="Regardez votre abonnement IPTV sur les appareils Apple compatibles avec une application adaptée et une connexion stable." steps={["Identifier l'appareil Apple", "Choisir l'application compatible", "Configurer l'accès", "Tester le replay et la VOD"]} />
+  </main>
+  <Footer />
+</BaseLayout>

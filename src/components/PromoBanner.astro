@@ -1,0 +1,7 @@
+---
+const isDe = !Astro.url.pathname.startsWith("/fr/");
+---
+
+<div class="promo-banner" role="note" aria-label={isDe ? "Aktionsangebot" : "Offre promotionnelle"}>
+  <p>{isDe ? "Zeitlich begrenztes Angebot — 25 % Rabatt auf Abos" : "Offre limitée — 25 % de réduction sur les abonnements"}</p>
+</div>

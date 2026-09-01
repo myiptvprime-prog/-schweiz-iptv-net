@@ -1,0 +1,35 @@
+---
+import { reviews } from "../data/site";
+import { deReviews } from "../data/de";
+
+const isDe = !Astro.url.pathname.startsWith("/fr/");
+const activeReviews = isDe ? deReviews : reviews;
+---
+
+<section class="section reviews" aria-labelledby="reviews-title">
+  <div class="reviews-header">
+    <div>
+      <p class="eyebrow">{isDe ? "Kundenbewertungen" : "Avis clients"}</p>
+      <h2 id="reviews-title">{isDe ? "Was unsere Kunden sagen" : "Ce que disent nos clients"}</h2>
+    </div>
+    <div class="rating-summary">
+      <strong>4.9 / 5</strong>
+      <span>{isDe ? "Gesamtbewertung" : "Note globale"}</span>
+    </div>
+  </div>
+
+  <div class="review-shell">
+    <div class="review-window">
+      <div class="review-track">
+        {activeReviews.map((review) => (
+          <article class="review-card">
+            <div class="stars" aria-label={isDe ? "5 Sterne" : "5 étoiles"}>★★★★★</div>
+            <h3>{review.name}</h3>
+            <p class="review-date">{review.date}</p>
+            <p>{review.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

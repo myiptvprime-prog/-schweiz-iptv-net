@@ -1,0 +1,19 @@
+---
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { site } from "../../data/site";
+---
+
+<BaseLayout title="Meilleur IPTV Suisse | Comparer avant de choisir" description="Comment choisir le meilleur IPTV Suisse: stabilite, support 24/7, compatibilite Smart TV, replay, VOD, prix en CHF et garantie.">
+  <Header />
+  <main>
+    <section class="page-hero">
+      <p class="eyebrow">Meilleur IPTV Suisse</p>
+      <h1>Comment choisir le meilleur IPTV Suisse pour votre foyer</h1>
+      <p>Le meilleur service n'est pas seulement celui qui annonce le plus grand nombre de chaînes. Comparez la stabilité, le support, la compatibilité, le replay, la VOD et la transparence.</p>
+      <a class="button primary" href={site.whatsappUrl}>Comparer mon besoin</a>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

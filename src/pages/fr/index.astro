@@ -1,0 +1,108 @@
+---
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import Features from "../../components/Features.astro";
+import HomeSeoSections from "../../components/HomeSeoSections.astro";
+import Pricing from "../../components/Pricing.astro";
+import Reviews from "../../components/Reviews.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { faq, singleScreenPlans, site } from "../../data/site";
+
+const title = "IPTV Suisse: abonnement pour Smart TV & box IPTV | Schweiz IPTV";
+const description =
+  "IPTV Suisse pour Smart TV, Android, iOS, Fire TV et box IPTV: abonnement en CHF avec HD/FHD/4K, replay, VOD, Multi Écran, support WhatsApp et garantie 48h.";
+const imageAlt =
+  "IPTV Suisse sur Smart TV: abonnement Schweiz IPTV avec chaînes suisses, HD, 4K, replay et VOD";
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      name: site.name,
+      url: site.url,
+      email: site.email,
+      logo: `${site.url}/logo-new.svg`,
+      contactPoint: {
+        "@type": "ContactPoint",
+        telephone: site.whatsapp,
+        contactType: "customer support",
+        availableLanguage: ["fr", "fr-CH"],
+      },
+    },
+    { "@type": "WebSite", name: site.name, url: site.url, inLanguage: "fr-CH" },
+    {
+      "@type": "Service",
+      name: "Abonnement IPTV Suisse",
+      provider: { "@type": "Organization", name: site.name, url: site.url },
+      areaServed: { "@type": "Country", name: "Suisse" },
+      serviceType: "IPTV",
+      image: `${site.url}/hero-iptv-suisse-1280.webp`,
+      offers: singleScreenPlans.map((plan) => ({
+        "@type": "Offer",
+        name: plan.name,
+        price: plan.priceChf,
+        priceCurrency: "CHF",
+        availability: "https://schema.org/InStock",
+        url: `${site.url}/fr/#${plan.id}`,
+      })),
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: faq.map((item) => ({
+        "@type": "Question",
+        name: item.q,
+        acceptedAnswer: { "@type": "Answer", text: item.a },
+      })),
+    },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description} imageAlt={imageAlt} preloadHero>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  <Header />
+
+  <main>
+    <section class="hero" id="accueil">
+      <picture>
+        <source
+          type="image/webp"
+          srcset="/hero-iptv-suisse-480.webp 480w, /hero-iptv-suisse-768.webp 768w, /hero-iptv-suisse-960.webp 960w, /hero-iptv-suisse-1280.webp 1280w"
+          sizes="(max-width: 640px) 480px, (max-width: 980px) 768px, 100vw"
+        />
+        <img
+          src="/hero-iptv-suisse-1280.jpg"
+          srcset="/hero-iptv-suisse-480.jpg 480w, /hero-iptv-suisse-768.jpg 768w, /hero-iptv-suisse-960.jpg 960w, /hero-iptv-suisse-1280.jpg 1280w"
+          sizes="(max-width: 640px) 480px, (max-width: 980px) 768px, 100vw"
+          width="1280"
+          height="720"
+          alt={imageAlt}
+          decoding="async"
+          fetchpriority="high"
+          loading="eager"
+        />
+        <figcaption class="sr-only">
+          Image principale IPTV Suisse: Smart TV avec interface IPTV, contenus HD/FHD/4K, salon suisse moderne et vue sur les montagnes.
+        </figcaption>
+      </picture>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <p class="eyebrow">IPTV Suisse romande</p>
+        <h1>IPTV Suisse: abonnement en français pour tous vos appareils</h1>
+        <p class="hero-copy">
+          Choisissez un abonnement IPTV Suisse en CHF avec serveur Premium, replay, VOD, qualité HD, FHD et 4K, plus un support 24/7 par WhatsApp.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#les-offres">Voir les abonnements</a>
+        </div>
+      </div>
+    </section>
+
+    <Features />
+    <Pricing />
+    <Reviews />
+    <HomeSeoSections />
+  </main>
+
+  <Footer />
+</BaseLayout>

@@ -1,0 +1,63 @@
+---
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { site } from "../../data/site";
+---
+
+<BaseLayout title="Conditions générales | Abonnement IPTV Suisse" description="Conditions générales Schweiz IPTV: abonnements IPTV Suisse, activation, compatibilité, garantie 48h, support et disponibilité des contenus.">
+  <Header />
+  <main>
+    <section class="page-hero legal-hero">
+      <p class="eyebrow">Conditions d'utilisation</p>
+      <h1>Conditions générales</h1>
+      <p>Ces conditions présentent les règles principales applicables aux abonnements IPTV Suisse, aux offres Multi Écran, au support et à la garantie satisfait ou remboursé 48h.</p>
+    </section>
+
+    <section class="section legal-page">
+      <article>
+        <h2>Objet du service</h2>
+        <p>Schweiz IPTV propose des abonnements IPTV Suisse accessibles sur différents appareils compatibles, notamment Smart TV, Android, iOS/tvOS, Windows, Fire TV et boîtiers IPTV compatibles.</p>
+        <p>Les caractéristiques exactes de chaque offre sont indiquées dans la section Les offres du site.</p>
+      </article>
+
+      <article>
+        <h2>Prix et durée des abonnements</h2>
+        <p>Les prix sont affichés en CHF. Les offres peuvent inclure une durée principale et, selon la formule choisie, des mois gratuits supplémentaires.</p>
+        <p>Les prix, remises, chaînes incluses, options et conditions peuvent être mis à jour. Le prix applicable est celui confirmé au moment de la commande.</p>
+      </article>
+
+      <article>
+        <h2>Activation et livraison des accès</h2>
+        <p>Après validation de la commande, les informations d'accès sont envoyées par e-mail ou via le canal de contact convenu. Le délai d'activation annoncé peut aller jusqu'à 15 minutes selon le traitement de la demande.</p>
+      </article>
+
+      <article>
+        <h2>Compatibilité des appareils</h2>
+        <p>Le client doit disposer d'une connexion Internet stable et d'un appareil compatible. Avant l'activation, il est recommandé de vérifier l'application IPTV disponible, la marque de l'appareil et les conditions techniques de lecture.</p>
+      </article>
+
+      <article>
+        <h2>Disponibilité des contenus</h2>
+        <p>Les chaînes TV, films, séries, événements sportifs, catégories, options de replay et contenus VOD peuvent varier selon l'abonnement, la disponibilité technique et les droits de diffusion applicables.</p>
+        <p>Schweiz IPTV ne doit pas être présenté comme garantissant en permanence une chaîne, un événement ou un contenu spécifique.</p>
+      </article>
+
+      <article>
+        <h2>Garantie satisfait ou remboursé 48h</h2>
+        <p>Une garantie de 48 heures peut s'appliquer après activation lorsque le service n'est pas compatible ou ne répond pas aux attentes annoncées, sous réserve d'une demande transmise dans le délai prévu.</p>
+        <p>La demande doit être envoyée au support avec les informations nécessaires pour identifier l'abonnement concerné.</p>
+      </article>
+
+      <article>
+        <h2>Support client</h2>
+        <p>Le support est disponible 24h/24 et 7j/7, y compris les jours fériés, par WhatsApp ou e-mail pour aider à l'installation, à la configuration et aux questions liées à l'abonnement.</p>
+        <div class="legal-actions">
+          <a class="button primary" href={site.whatsappUrl}>WhatsApp</a>
+          <a class="button secondary" href={`mailto:${site.email}`}>E-mail</a>
+        </div>
+      </article>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

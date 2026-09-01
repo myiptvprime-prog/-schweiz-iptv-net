@@ -1,0 +1,80 @@
+---
+import { singleScreenPlans, multiScreenPlans, site } from "../data/site";
+import { deSingleScreenPlans, deMultiScreenPlans } from "../data/de";
+
+const isDe = !Astro.url.pathname.startsWith("/fr/");
+const activeSinglePlans = isDe ? deSingleScreenPlans : singleScreenPlans;
+const activeMultiPlans = isDe ? deMultiScreenPlans : multiScreenPlans;
+
+const monthlyPrice = (priceChf: number, includedMonths: number) =>
+  isDe ? `≈ ${(priceChf / includedMonths).toFixed(2)} CHF / Monat` : `≈ ${(priceChf / includedMonths).toFixed(2)} CHF / mois`;
+const whatsappForPlan = (planName: string) => {
+  const message = isDe
+    ? `Hello, Schweiz IPTV. Ich komme von der Website schweiz-IPTV.net. Ich interessiere mich fuer dieses Abonnement: ${planName}. Bitte senden Sie mir den Zahlungslink.`
+    : `Hello, Schweiz IPTV. Je viens du site schweiz-IPTV.net. Je souhaite cet abonnement: ${planName}. Merci de m'envoyer le lien de paiement.`;
+
+  return `https://wa.me/${site.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(message)}`;
+};
+const singlePlanLabel = (planName: string) =>
+  isDe ? `IPTV Abo auswählen: ${planName}` : `Choisir cet abonnement IPTV: ${planName}`;
+const multiPlanLabel = (planName: string) =>
+  isDe ? `Multi-Screen IPTV Abo auswählen: ${planName}` : `Choisir cet abonnement IPTV Multi Écran: ${planName}`;
+---
+
+<section class="section pricing" id="abonnements">
+  <div class="section-title">
+    <p class="eyebrow">{isDe ? "IPTV Abos Schweiz" : "Nos abonnements Schweiz IPTV"}</p>
+    <h2>{isDe ? "IPTV Abo Schweiz: Angebote in CHF" : "Abonnements IPTV Suisse en CHF"}</h2>
+    <p>{isDe ? "Vergleichen Sie Laufzeit, Anzahl Bildschirme, enthaltenen Katalog und den monatlichen Preis." : "Comparez les offres en CHF selon la durée, le nombre d'écrans, le catalogue inclus et le prix mensuel équivalent."}</p>
+  </div>
+
+  <div class="section-title offer-title" id="les-offres">
+    <p class="eyebrow">{isDe ? "Angebote" : "Les offres"}</p>
+    <h2>{isDe ? "IPTV Angebote" : "Les offres"}</h2>
+    <p>{isDe ? "Ein IPTV Abo Schweiz für Smart TV, Android, iOS, Windows, Fire TV und IPTV Box, mit Replay, VOD, Support 24/7 und kostenlosen Updates." : "Un abonnement IPTV Suisse pensé pour Smart TV, Android, iOS, Windows, Fire TV et boîtier IPTV, avec replay, VOD, support 24/7 et mises à jour gratuites."}</p>
+  </div>
+  <div class="pricing-grid">
+    {activeSinglePlans.map((plan) => (
+      <article id={plan.id} class:list={["price-card", { featured: plan.popular }]}>
+        <p class="badge">{plan.badge}</p>
+        <h3>{plan.name}</h3>
+        <div class="price-line">
+          <p class="price">{plan.price}</p>
+          <span class="discount">{plan.discount}</span>
+        </div>
+        <p class="monthly-price">{monthlyPrice(plan.priceChf, plan.includedMonths)}</p>
+        <p class="muted">{plan.duration} - {plan.channels}</p>
+        <ul>
+          {plan.features.map((feature) => <li>{feature}</li>)}
+        </ul>
+        <a class="button primary" href={whatsappForPlan(plan.name)} aria-label={singlePlanLabel(plan.name)}>
+          {isDe ? "Abo auswählen" : "Choisir ce forfait"}
+        </a>
+      </article>
+    ))}
+  </div>
+
+  <div class="multi-box" id="multi-ecran">
+    <div>
+      <p class="eyebrow">{isDe ? "Multi-Screen" : "Multi écran"}</p>
+      <h3>{isDe ? "Multi-Screen" : "Multi écran"}</h3>
+      <p>{isDe ? "Die gleichen IPTV Abos mit zwei Bildschirmen und angepasstem Preis für Haushalte mit mehreren Geräten." : "Les mêmes abonnements IPTV avec deux écrans et un prix adapté pour les foyers qui regardent sur plusieurs appareils."}</p>
+    </div>
+    <div class="multi-list">
+      {activeMultiPlans.map((plan) => (
+        <a id={plan.id} href={whatsappForPlan(plan.name)} class:list={["multi-row", { selected: plan.popular }]} aria-label={multiPlanLabel(plan.name)}>
+          <span>{plan.name}</span>
+          <span class="multi-price">
+            <span class="multi-price-top">
+              <strong>{plan.price}</strong>
+              <em>{plan.discount}</em>
+            </span>
+            <small>{monthlyPrice(plan.priceChf, plan.includedMonths)}</small>
+            {"note" in plan && plan.note ? <small>{plan.note}</small> : null}
+          </span>
+        </a>
+      ))}
+    </div>
+  </div>
+  <p class="guarantee">{isDe ? "48 Stunden Zufriedenheitsgarantie." : "Garantie satisfait ou remboursé 48h."}</p>
+</section>

@@ -1,0 +1,19 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site";
+---
+
+<BaseLayout title="IPTV Box Schweiz | Abo für IPTV Box und Android TV" description="Nutzen Sie Ihr IPTV Abo Schweiz auf IPTV Box, Android TV, MAG und Fire TV mit deutschsprachigem Installationssupport." canonical="/iptv-box-schweiz/" lang="de-CH">
+  <Header />
+  <main>
+    <section class="page-hero">
+      <p class="eyebrow">IPTV Box Schweiz</p>
+      <h1>IPTV Abo für IPTV Box, Android TV, MAG und Fire TV</h1>
+      <p>IPTV Boxen sind praktisch für Haushalte, die eine stabile Oberfläche am Fernseher wünschen. Wir helfen vor der Aktivierung bei der Kompatibilitätsprüfung.</p>
+      <a class="button primary" href={site.whatsappUrl}>IPTV Box prüfen</a>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

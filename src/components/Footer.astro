@@ -1,0 +1,74 @@
+---
+import { site } from "../data/site";
+
+const isDe = !Astro.url.pathname.startsWith("/fr/");
+const homePath = isDe ? "/" : "/fr/";
+const isHome = Astro.url.pathname === homePath;
+const sectionHref = (id: string) => (isHome ? `#${id}` : `${homePath}#${id}`);
+const legalLinks = isDe
+  ? [
+      ["Impressum", "/impressum/"],
+      ["Datenschutz", "/datenschutz/"],
+      ["AGB", "/agb/"],
+    ]
+  : [
+      ["Mentions légales", "/fr/mentions-legales/"],
+      ["Politique de confidentialité", "/fr/confidentialite/"],
+      ["Conditions générales", "/fr/conditions/"],
+    ];
+const whatsappMessage = isDe
+  ? "Hello, Schweiz IPTV. Ich interessiere mich fuer ein IPTV Abo Schweiz. Bitte senden Sie mir Informationen und den Zahlungslink."
+  : "Hello, Schweiz IPTV. Je viens du site schweiz-IPTV.net. Je souhaite des informations sur un abonnement IPTV Suisse et le lien de paiement.";
+const whatsappUrl = `https://wa.me/${site.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(whatsappMessage)}`;
+---
+
+<footer class="footer">
+  <div class="footer-main">
+    <div class="footer-column footer-intro">
+      <a class="brand footer-brand" href={sectionHref("accueil")} aria-label={isDe ? `${site.name} Startseite` : `${site.name} accueil`}>
+        <img
+          src="/logo-new.svg"
+          width="1120"
+          height="190"
+          alt={isDe ? "Logo Schweiz IPTV fuer IPTV Schweiz Abos" : "Logo Schweiz IPTV pour abonnement IPTV Suisse"}
+        />
+      </a>
+      <p>
+        {isDe
+          ? "Schweiz IPTV bietet IPTV Schweiz Abos mit einer grossen Auswahl an TV-Sendern, Filmen und Inhalten für kompatible Geräte. Entdecken Sie unsere IPTV Angebote, Multi-Screen-Abos und den Support für eine einfache TV-Erfahrung."
+          : "Schweiz IPTV vous propose des abonnements IPTV Suisse avec un large choix de chaînes TV, de films et de contenus accessibles sur plusieurs appareils compatibles. Découvrez nos offres IPTV, nos abonnements Multi Écran et notre support client pour profiter d'une expérience TV simple et flexible."}
+      </p>
+    </div>
+
+    <nav class="footer-column" aria-label="Navigation">
+      <h2>{isDe ? "Navigation" : "Navigation"}</h2>
+      <a href={sectionHref("accueil")}>{isDe ? "Startseite" : "Accueil"}</a>
+      <a href={sectionHref("les-offres")}>{isDe ? "IPTV Angebote" : "Les offres"}</a>
+      <a href={sectionHref("multi-ecran")}>{isDe ? "Multi-Screen" : "Multi Écran"}</a>
+      <a href={sectionHref("faq")}>FAQ</a>
+      <a href={sectionHref("installation")}>Installation</a>
+    </nav>
+
+    <nav class="footer-column" aria-label="Support">
+      <h2>Support</h2>
+      <a href={sectionHref("contact")}>{isDe ? "Kontakt" : "Contact"}</a>
+      <a href={whatsappUrl}>WhatsApp</a>
+      <a href={`mailto:${site.email}`}>E-Mail: {site.email}</a>
+    </nav>
+
+    <nav class="footer-column" aria-label="Les abonnements">
+      <h2>{isDe ? "IPTV Abos" : "Les abonnements"}</h2>
+      <a href={sectionHref(isDe ? "iptv-abo-12-monate" : "offre-iptv-12-mois")}>{isDe ? "IPTV Abo 12 Monate" : "Abonnement IPTV 12 mois"}</a>
+      <a href={sectionHref(isDe ? "iptv-abo-12-monate-2-monate-gratis" : "offre-iptv-12-mois-2-mois-gratuit")}>{isDe ? "IPTV Abo 12 Monate + 2 Monate gratis" : "Abonnement IPTV 12 mois + 2 mois gratuits"}</a>
+      <a href={sectionHref(isDe ? "iptv-abo-12-monate-3-monate-gratis" : "offre-iptv-12-mois-3-mois-gratuit")}>{isDe ? "IPTV Abo 12 Monate + 3 Monate gratis" : "Abonnement IPTV 12 mois + 3 mois gratuits"}</a>
+      <a href={sectionHref("multi-ecran")}>{isDe ? "Multi-Screen Abo" : "Le forfait Multi Écran"}</a>
+    </nav>
+  </div>
+
+  <div class="footer-bottom">
+    <p>{isDe ? `© 2026 ${site.name} — Alle Rechte vorbehalten.` : `© 2026 ${site.name} — Tous droits réservés.`}</p>
+    <nav aria-label={isDe ? "Rechtliche Links" : "Liens légaux"}>
+      {legalLinks.map(([label, href]) => <a href={href}>{label}</a>)}
+    </nav>
+  </div>
+</footer>

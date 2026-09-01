@@ -1,0 +1,21 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Pricing from "../components/Pricing.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site";
+---
+
+<BaseLayout title="IPTV Abo Schweiz: Angebote ab 69 CHF" description="Vergleichen Sie IPTV Abo Schweiz Angebote für 12 Monate, Gratismonate und Multi-Screen. HD/FHD/4K, Replay, VOD, WhatsApp-Support 24/7 und 48h Garantie." canonical="/iptv-abo-schweiz/" lang="de-CH">
+  <Header />
+  <main>
+    <section class="page-hero">
+      <p class="eyebrow">IPTV Abo Schweiz</p>
+      <h1>IPTV Abos in CHF für die Schweiz</h1>
+      <p>Wählen Sie ein IPTV Abo für kompatible Geräte mit Premium-Server, HD/FHD/4K Qualität, Replay, VOD und Support rund um die Uhr.</p>
+      <a class="button primary" href={site.whatsappUrl}>Beratung per WhatsApp</a>
+    </section>
+    <Pricing />
+  </main>
+  <Footer />
+</BaseLayout>

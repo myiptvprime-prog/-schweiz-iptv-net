@@ -1,0 +1,26 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Seite nicht gefunden | Schweiz IPTV"
+  description="Die angeforderte Seite wurde nicht gefunden. Zurück zu Schweiz IPTV, IPTV Schweiz Angeboten, Installation und FAQ."
+  canonical="/404/"
+  lang="de-CH"
+>
+  <Header />
+  <main>
+    <section class="page-hero legal-hero">
+      <p class="eyebrow">404</p>
+      <h1>Seite nicht gefunden</h1>
+      <p>Die gesuchte Seite ist nicht verfügbar. Zurück zur Startseite oder direkt zu den IPTV Schweiz Angeboten.</p>
+      <div class="legal-actions">
+        <a class="button primary" href="/">Startseite</a>
+        <a class="button secondary" href="/#les-offres">IPTV Angebote</a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

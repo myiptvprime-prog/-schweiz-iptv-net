@@ -1,0 +1,19 @@
+---
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { site } from "../../data/site";
+---
+
+<BaseLayout title="Box IPTV Suisse | Abonnement pour boîtier IPTV et Android TV" description="Utilisez votre abonnement IPTV Suisse sur box IPTV, Android TV, MAG et Fire TV avec support d'installation en français.">
+  <Header />
+  <main>
+    <section class="page-hero">
+      <p class="eyebrow">Box IPTV Suisse</p>
+      <h1>Abonnement IPTV pour boîtier IPTV, Android TV, MAG et Fire TV</h1>
+      <p>Les box IPTV sont pratiques pour les foyers qui veulent une interface stable sur télévision. Nous vous aidons à vérifier la compatibilité avant l'activation.</p>
+      <a class="button primary" href={site.whatsappUrl}>Tester ma box IPTV</a>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

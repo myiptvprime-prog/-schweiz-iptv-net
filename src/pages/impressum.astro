@@ -1,0 +1,20 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site";
+---
+
+<BaseLayout title="Impressum | Schweiz IPTV" description="Impressum von schweiz-IPTV.net: Anbieter, Kontakt, Verantwortung, Inhalte und rechtliche Hinweise." canonical="/impressum/" lang="de-CH">
+  <Header />
+  <main>
+    <section class="page-hero legal-hero"><p class="eyebrow">Rechtliche Informationen</p><h1>Impressum</h1><p>Diese Seite enthält Angaben zum Angebot Schweiz IPTV auf schweiz-IPTV.net.</p></section>
+    <section class="section legal-page">
+      <article><h2>Anbieter</h2><p><strong>Name:</strong> Schweiz IPTV</p><p><strong>Domain:</strong> {site.displayDomain}</p><p><strong>Kontakt:</strong> <a href={`mailto:${site.email}`}>{site.email}</a></p><p><strong>WhatsApp:</strong> <a href={site.whatsappUrl}>{site.whatsapp}</a></p><p class="notice">Offizielle Unternehmensangaben wie Postadresse und Registrierungsdaten müssen vor der öffentlichen Produktion geprüft und ergänzt werden.</p></article>
+      <article><h2>Verantwortung für Inhalte</h2><p>Schweiz IPTV bemüht sich um klare und aktuelle Informationen zu IPTV Abos in der Schweiz, Multi-Screen-Angeboten, kompatiblen Geräten und Support.</p></article>
+      <article><h2>Verfügbarkeit</h2><p>Sender, Filme, Serien, Replay und VOD können je nach Abo, technischer Verfügbarkeit, App, Gerät und geltenden Rechten variieren.</p></article>
+      <article><h2>Kontakt</h2><p>Für Fragen zum Angebot, Korrekturen oder Support erreichen Sie Schweiz IPTV per WhatsApp oder E-Mail.</p><div class="legal-actions"><a class="button primary" href={site.whatsappUrl}>WhatsApp</a><a class="button secondary" href={`mailto:${site.email}`}>E-Mail</a></div></article>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

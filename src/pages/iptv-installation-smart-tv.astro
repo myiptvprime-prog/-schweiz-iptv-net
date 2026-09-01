@@ -1,0 +1,14 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import DeviceGuide from "../components/DeviceGuide.astro";
+---
+
+<BaseLayout title="IPTV Installation Schweiz | Smart TV, Android, iOS, Fire TV" description="IPTV Installation in der Schweiz für Smart TV, Android, iOS, Windows, Fire TV und IPTV Box mit WhatsApp Support 24/7." canonical="/iptv-installation-smart-tv/" lang="de-CH">
+  <Header />
+  <main>
+    <DeviceGuide eyebrow="IPTV Installation Schweiz" title="IPTV auf Smart TV, Android, iOS, Windows und Fire TV installieren" description="Die Einrichtung hängt vom Gerät und der verfügbaren App ab. Wir helfen Ihnen, die passende App zu wählen und das IPTV Abo korrekt zu aktivieren." steps={["Gerät und Internetverbindung prüfen", "Kompatible IPTV App installieren", "Zugangsdaten eintragen", "Sender, Replay und VOD testen"]} />
+  </main>
+  <Footer />
+</BaseLayout>

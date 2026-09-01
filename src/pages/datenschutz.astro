@@ -1,0 +1,20 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site";
+---
+
+<BaseLayout title="Datenschutz | Schweiz IPTV" description="Datenschutzerklärung von Schweiz IPTV: Kontaktinformationen, Zweck der Nutzung, Aufbewahrung, Sicherheit und Rechte der Nutzer." canonical="/datenschutz/" lang="de-CH">
+  <Header />
+  <main>
+    <section class="page-hero legal-hero"><p class="eyebrow">Datenschutz</p><h1>Datenschutz</h1><p>Diese Erklärung beschreibt, wie Informationen aus WhatsApp, E-Mail oder Kontaktanfragen für IPTV Abos in der Schweiz verwendet werden.</p></section>
+    <section class="section legal-page">
+      <article><h2>Erhobene Daten</h2><p>Bei Kontaktaufnahme können Name, E-Mail, WhatsApp Nummer, Gerät, Kanton, gewünschtes Angebot und Supportfrage übermittelt werden.</p></article>
+      <article><h2>Zweck der Nutzung</h2><p>Die Informationen dienen der Beantwortung Ihrer Anfrage, der Prüfung von Gerätekompatibilität, der Beratung zum IPTV Abo Schweiz und dem Support.</p></article>
+      <article><h2>Kontaktkanäle</h2><p>Kommunikation kann über WhatsApp oder E-Mail erfolgen. Diese Dienste können eigene Datenschutzregeln anwenden.</p><p><a href={`mailto:${site.email}`}>{site.email}</a></p></article>
+      <article><h2>Ihre Rechte</h2><p>Sie können Auskunft, Korrektur oder Löschung Ihrer übermittelten Informationen verlangen, soweit keine gesetzlichen Pflichten entgegenstehen.</p></article>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
