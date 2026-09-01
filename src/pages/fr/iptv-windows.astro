@@ -1,0 +1,15 @@
+---
+import DeviceGuide from "../../components/DeviceGuide.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import "../../styles/global.css";
+---
+
+<BaseLayout title="IPTV Windows Suisse | Regarder IPTV sur PC" description="Installer IPTV sur Windows en Suisse: guide PC, application compatible, abonnement IPTV et support en français.">
+  <Header />
+  <main>
+    <DeviceGuide eyebrow="IPTV Windows Suisse" title="Regarder IPTV sur PC Windows en Suisse" description="Windows permet de tester rapidement un abonnement IPTV, notamment avant une installation définitive sur télévision." steps={["Vérifier Windows et la connexion", "Installer un lecteur compatible", "Configurer l'abonnement", "Tester les catégories utiles"]} />
+  </main>
+  <Footer />
+</BaseLayout>

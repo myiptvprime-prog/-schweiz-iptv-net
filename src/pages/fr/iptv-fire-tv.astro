@@ -1,0 +1,15 @@
+---
+import DeviceGuide from "../../components/DeviceGuide.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import "../../styles/global.css";
+---
+
+<BaseLayout title="IPTV Fire TV Suisse | Installer IPTV sur Fire TV Stick" description="Guide IPTV Fire TV Suisse pour installer et configurer un abonnement IPTV sur Fire TV Stick avec support WhatsApp 24/7.">
+  <Header />
+  <main>
+    <DeviceGuide eyebrow="IPTV Fire TV Suisse" title="Installer IPTV sur Fire TV Stick en Suisse" description="Fire TV est une option pratique pour transformer une télévision en interface IPTV rapide et simple." steps={["Préparer le Fire TV Stick", "Installer l'application IPTV", "Ajouter les identifiants", "Optimiser la connexion Wi-Fi"]} />
+  </main>
+  <Footer />
+</BaseLayout>

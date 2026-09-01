@@ -1,0 +1,56 @@
+---
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { site } from "../../data/site";
+import "../../styles/global.css";
+---
+
+<BaseLayout title="Mentions légales | Schweiz IPTV" description="Mentions légales du site schweiz-IPTV.net: éditeur, contact, responsabilité, propriété intellectuelle et informations de publication.">
+  <Header />
+  <main>
+    <section class="page-hero legal-hero">
+      <p class="eyebrow">Informations légales</p>
+      <h1>Mentions légales</h1>
+      <p>Cette page présente les informations relatives au site Schweiz IPTV, accessible à l'adresse schweiz-IPTV.net.</p>
+    </section>
+
+    <section class="section legal-page">
+      <article>
+        <h2>Éditeur du site</h2>
+        <p><strong>Nom du site:</strong> Schweiz IPTV</p>
+        <p><strong>Domaine:</strong> {site.domain}</p>
+        <p><strong>Contact:</strong> <a href={`mailto:${site.email}`}>{site.email}</a></p>
+        <p><strong>WhatsApp:</strong> <a href={site.whatsappUrl}>{site.whatsapp}</a></p>
+        <p class="notice">Les informations administratives officielles de l'entreprise, notamment l'adresse postale et les éventuelles références d'enregistrement, doivent être vérifiées et complétées avant la mise en production publique.</p>
+      </article>
+
+      <article>
+        <h2>Responsabilité éditoriale</h2>
+        <p>Schweiz IPTV s'efforce de fournir des informations claires, à jour et utiles sur ses abonnements IPTV Suisse, ses offres Multi Écran, les appareils compatibles et les modalités de support.</p>
+        <p>Malgré le soin apporté au contenu, des erreurs ou modifications peuvent survenir, notamment concernant les prix, les caractéristiques techniques, les chaînes disponibles, le replay ou la VOD.</p>
+      </article>
+
+      <article>
+        <h2>Disponibilité des services</h2>
+        <p>Les contenus, chaînes TV, films, séries, options de replay et fonctionnalités peuvent varier selon l'abonnement choisi, la disponibilité technique, l'application utilisée, l'appareil compatible et les droits de diffusion applicables.</p>
+        <p>Avant toute commande, le client est invité à vérifier la compatibilité de son appareil et les conditions de l'offre sélectionnée.</p>
+      </article>
+
+      <article>
+        <h2>Propriété intellectuelle</h2>
+        <p>Les textes, visuels, éléments graphiques, logo et contenus présents sur ce site sont destinés à la présentation du service Schweiz IPTV. Toute reproduction ou réutilisation non autorisée peut être interdite.</p>
+      </article>
+
+      <article>
+        <h2>Contact</h2>
+        <p>Pour toute demande concernant le site, une offre IPTV Suisse, une correction d'information ou une question de support, vous pouvez contacter Schweiz IPTV par e-mail ou WhatsApp.</p>
+        <div class="legal-actions">
+          <a class="button primary" href={site.whatsappUrl}>WhatsApp</a>
+          <a class="button secondary" href={`mailto:${site.email}`}>E-mail</a>
+        </div>
+      </article>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

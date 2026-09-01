@@ -1,0 +1,15 @@
+---
+import DeviceGuide from "../../components/DeviceGuide.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import "../../styles/global.css";
+---
+
+<BaseLayout title="IPTV Smart TV Suisse | Samsung, LG et applications IPTV" description="Installer IPTV sur Smart TV en Suisse: Samsung, LG et applications compatibles avec abonnement IPTV Suisse et support 24/7.">
+  <Header />
+  <main>
+    <DeviceGuide eyebrow="IPTV Smart TV Suisse" title="IPTV sur Smart TV Samsung et LG en Suisse" description="La Smart TV est le choix le plus direct pour profiter d'un abonnement IPTV Suisse sans boîtier supplémentaire." steps={["Identifier la marque TV", "Vérifier l'application disponible", "Ajouter l'abonnement", "Tester les chaînes principales"]} />
+  </main>
+  <Footer />
+</BaseLayout>

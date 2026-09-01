@@ -1,0 +1,32 @@
+---
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { site } from "../../data/site";
+import "../../styles/global.css";
+---
+
+<BaseLayout title="IPTV légal en Suisse | Comment choisir un service IPTV" description="Comprendre l'IPTV légal en Suisse: droits de diffusion, prudence sur les chaînes, conditions d'abonnement et bonnes pratiques avant de choisir.">
+  <Header />
+  <main>
+    <section class="page-hero">
+      <p class="eyebrow">IPTV légal Suisse</p>
+      <h1>IPTV légal en Suisse: les points à vérifier avant de s'abonner</h1>
+      <p>Un service IPTV sérieux doit expliquer ses conditions, ses limites, ses appareils compatibles et la disponibilité des contenus sans promesse trompeuse.</p>
+      <a class="button primary" href={site.whatsappUrl}>Poser une question</a>
+    </section>
+    <section class="section proof">
+      <div>
+        <h2>Vérifier les droits, la transparence et le support</h2>
+        <p>Les chaînes, bouquets sportifs, films et séries doivent être proposés dans le respect des droits applicables. Avant de publier des noms de chaînes ou de plateformes, confirmez toujours que leur promotion est autorisée.</p>
+      </div>
+      <ul class="checklist">
+        <li>Conditions et remboursement visibles</li>
+        <li>Pas de fausses promesses de contenu</li>
+        <li>Support identifie et joignable</li>
+        <li>Paiement et duree d'abonnement clairs</li>
+      </ul>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
