@@ -191,32 +191,23 @@ const singlePlanLabel = (planName: string) =>
             "Bank transfer": "Virement bancaire",
           }[payment] || payment;
       const total = plan.priceChf * quantity;
+      const priceLine = quantity > 1 ? `${total} CHF (${plan.priceChf} CHF x ${quantity})` : `${total} CHF`;
       const message = isDe
         ? [
-            "Hallo, ich moechte ein IPTV Abo von swageiptv.net bestellen.",
-            "",
+            "Hallo: schweiz-iptv.net",
             `E-Mail-Adresse: ${email}`,
             `Abo: ${plan.name}`,
-            `Dauer: ${plan.duration}`,
             `Anzahl: ${quantity}`,
-            `Einzelpreis: ${plan.priceChf} CHF`,
-            `Gesamtpreis: ${total} CHF`,
+            `Preis: ${priceLine}`,
             `Zahlungsmethode: ${paymentLabel}`,
-            "",
-            "Vielen Dank. Bitte senden Sie mir die naechsten Schritte zur Bestellung.",
           ].join("\n")
         : [
-            "Bonjour, je souhaite commander un abonnement IPTV depuis swageiptv.net.",
-            "",
+            "Bonjour : schweiz-iptv.net",
             `Adresse e-mail: ${email}`,
-            `Abonnement: ${plan.name}`,
-            `Duree: ${plan.duration}`,
-            `Quantite: ${quantity}`,
-            `Prix unitaire: ${plan.priceChf} CHF`,
-            `Prix total: ${total} CHF`,
-            `Mode de paiement: ${paymentLabel}`,
-            "",
-            "Merci de m'indiquer les prochaines etapes pour finaliser ma commande.",
+            `Abonnement : ${plan.name}`,
+            `Quantite : ${quantity}`,
+            `Prix : ${priceLine}`,
+            `Mode de paiement : ${paymentLabel}`,
           ].join("\n");
 
       window.location.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
