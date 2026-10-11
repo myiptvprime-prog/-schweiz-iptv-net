@@ -35,8 +35,8 @@ const whatsappUrl = `https://wa.me/${site.whatsapp.replace(/\D/g, "")}?text=${en
       </a>
       <p>
         {isDe
-          ? "Schweiz IPTV bietet IPTV Schweiz Abos mit einer grossen Auswahl an TV-Sendern, Filmen und Inhalten für kompatible Geräte. Entdecken Sie unsere IPTV Angebote, Multi-Screen-Abos und den Support für eine einfache TV-Erfahrung."
-          : "Schweiz IPTV vous propose des abonnements IPTV Suisse avec un large choix de chaînes TV, de films et de contenus accessibles sur plusieurs appareils compatibles. Découvrez nos offres IPTV, nos abonnements Multi Écran et notre support client pour profiter d'une expérience TV simple et flexible."}
+          ? "Schweiz IPTV bietet IPTV Schweiz Abos mit einer grossen Auswahl an TV-Sendern, Filmen und Inhalten für kompatible Geräte. Entdecken Sie unsere IPTV Angebote und den Support für eine einfache TV-Erfahrung."
+          : "Schweiz IPTV vous propose des abonnements IPTV Suisse avec un large choix de chaînes TV, de films et de contenus accessibles sur plusieurs appareils compatibles. Découvrez nos offres IPTV et notre support client pour profiter d'une expérience TV simple et flexible."}
       </p>
     </div>
 
@@ -44,7 +44,6 @@ const whatsappUrl = `https://wa.me/${site.whatsapp.replace(/\D/g, "")}?text=${en
       <h2>{isDe ? "Navigation" : "Navigation"}</h2>
       <a href={sectionHref("accueil")}>{isDe ? "Startseite" : "Accueil"}</a>
       <a href={sectionHref("les-offres")}>{isDe ? "IPTV Angebote" : "Les offres"}</a>
-      <a href={sectionHref("multi-ecran")}>{isDe ? "Multi-Screen" : "Multi Écran"}</a>
       <a href={sectionHref("faq")}>FAQ</a>
       <a href={sectionHref("installation")}>Installation</a>
     </nav>
@@ -58,10 +57,9 @@ const whatsappUrl = `https://wa.me/${site.whatsapp.replace(/\D/g, "")}?text=${en
 
     <nav class="footer-column" aria-label="Les abonnements">
       <h2>{isDe ? "IPTV Abos" : "Les abonnements"}</h2>
-      <a href={sectionHref(isDe ? "iptv-abo-12-monate" : "offre-iptv-12-mois")}>{isDe ? "IPTV Abo 12 Monate" : "Abonnement IPTV 12 mois"}</a>
-      <a href={sectionHref(isDe ? "iptv-abo-12-monate-2-monate-gratis" : "offre-iptv-12-mois-2-mois-gratuit")}>{isDe ? "IPTV Abo 12 Monate + 2 Monate gratis" : "Abonnement IPTV 12 mois + 2 mois gratuits"}</a>
-      <a href={sectionHref(isDe ? "iptv-abo-12-monate-3-monate-gratis" : "offre-iptv-12-mois-3-mois-gratuit")}>{isDe ? "IPTV Abo 12 Monate + 3 Monate gratis" : "Abonnement IPTV 12 mois + 3 mois gratuits"}</a>
-      <a href={sectionHref("multi-ecran")}>{isDe ? "Multi-Screen Abo" : "Le forfait Multi Écran"}</a>
+      <a href={sectionHref("iptv-abo-3-months")}>IPTV ABO 3 Months</a>
+      <a href={sectionHref("iptv-abo-6-months")}>IPTV ABO 6 Months</a>
+      <a href={sectionHref("iptv-abo-12-months")}>IPTV ABO 12 Months</a>
     </nav>
   </div>
 

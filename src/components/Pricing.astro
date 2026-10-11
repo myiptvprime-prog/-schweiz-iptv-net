@@ -1,38 +1,36 @@
 ---
-import { singleScreenPlans, multiScreenPlans, site } from "../data/site";
-import { deSingleScreenPlans, deMultiScreenPlans } from "../data/de";
+import { singleScreenPlans, site } from "../data/site";
+import { deSingleScreenPlans } from "../data/de";
 
 const isDe = !Astro.url.pathname.startsWith("/fr/");
 const activeSinglePlans = isDe ? deSingleScreenPlans : singleScreenPlans;
-const activeMultiPlans = isDe ? deMultiScreenPlans : multiScreenPlans;
+const orderPlans = activeSinglePlans.map((plan) => ({
+  id: plan.id,
+  name: plan.name,
+  duration: plan.duration,
+  priceChf: plan.priceChf,
+  price: plan.price,
+}));
 
 const monthlyPrice = (priceChf: number, includedMonths: number) =>
   isDe ? `≈ ${(priceChf / includedMonths).toFixed(2)} CHF / Monat` : `≈ ${(priceChf / includedMonths).toFixed(2)} CHF / mois`;
-const whatsappForPlan = (planName: string) => {
-  const message = isDe
-    ? `Hello, Schweiz IPTV. Ich komme von der Website schweiz-IPTV.net. Ich interessiere mich fuer dieses Abonnement: ${planName}. Bitte senden Sie mir den Zahlungslink.`
-    : `Hello, Schweiz IPTV. Je viens du site schweiz-IPTV.net. Je souhaite cet abonnement: ${planName}. Merci de m'envoyer le lien de paiement.`;
-
-  return `https://wa.me/${site.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(message)}`;
-};
 const singlePlanLabel = (planName: string) =>
-  isDe ? `IPTV Abo auswählen: ${planName}` : `Choisir cet abonnement IPTV: ${planName}`;
-const multiPlanLabel = (planName: string) =>
-  isDe ? `Multi-Screen IPTV Abo auswählen: ${planName}` : `Choisir cet abonnement IPTV Multi Écran: ${planName}`;
+  isDe ? `IPTV Abo bestellen: ${planName}` : `Commander cet abonnement IPTV: ${planName}`;
 ---
 
 <section class="section pricing" id="abonnements">
   <div class="section-title">
     <p class="eyebrow">{isDe ? "IPTV Abos Schweiz" : "Nos abonnements Schweiz IPTV"}</p>
     <h2>{isDe ? "IPTV Abo Schweiz: Angebote in CHF" : "Abonnements IPTV Suisse en CHF"}</h2>
-    <p>{isDe ? "Vergleichen Sie Laufzeit, Anzahl Bildschirme, enthaltenen Katalog und den monatlichen Preis." : "Comparez les offres en CHF selon la durée, le nombre d'écrans, le catalogue inclus et le prix mensuel équivalent."}</p>
+    <p>{isDe ? "Vergleichen Sie Laufzeit, enthaltenen Katalog und den monatlichen Preis. Alle Abos enthalten dieselben Vorteile; nur Dauer und Preis unterscheiden sich." : "Comparez les offres en CHF selon la durée, le catalogue inclus et le prix mensuel équivalent. Tous les abonnements incluent les mêmes avantages; seuls la durée et le prix changent."}</p>
   </div>
 
   <div class="section-title offer-title" id="les-offres">
     <p class="eyebrow">{isDe ? "Angebote" : "Les offres"}</p>
     <h2>{isDe ? "IPTV Angebote" : "Les offres"}</h2>
-    <p>{isDe ? "Ein IPTV Abo Schweiz für Smart TV, Android, iOS, Windows, Fire TV und IPTV Box, mit Replay, VOD, Support 24/7 und kostenlosen Updates." : "Un abonnement IPTV Suisse pensé pour Smart TV, Android, iOS, Windows, Fire TV et boîtier IPTV, avec replay, VOD, support 24/7 et mises à jour gratuites."}</p>
+    <p>{isDe ? "Ein IPTV Abo Schweiz für Smart TV, Android, iOS, Windows, Fire TV und IPTV Box, mit Replay, VOD, Support per WhatsApp und ohne automatische Verlängerung." : "Un abonnement IPTV Suisse pensé pour Smart TV, Android, iOS, Windows, Fire TV et boîtier IPTV, avec replay, VOD, support WhatsApp et sans renouvellement automatique."}</p>
   </div>
+
   <div class="pricing-grid">
     {activeSinglePlans.map((plan) => (
       <article id={plan.id} class:list={["price-card", { featured: plan.popular }]}>
@@ -47,34 +45,156 @@ const multiPlanLabel = (planName: string) =>
         <ul>
           {plan.features.map((feature) => <li>{feature}</li>)}
         </ul>
-        <a class="button primary" href={whatsappForPlan(plan.name)} aria-label={singlePlanLabel(plan.name)}>
+        <button class="button primary order-trigger" type="button" data-plan-id={plan.id} aria-label={singlePlanLabel(plan.name)}>
           {isDe ? "Abo auswählen" : "Choisir ce forfait"}
-        </a>
+        </button>
       </article>
     ))}
   </div>
 
-  <div class="multi-box" id="multi-ecran">
-    <div>
-      <p class="eyebrow">{isDe ? "Multi-Screen" : "Multi écran"}</p>
-      <h3>{isDe ? "Multi-Screen" : "Multi écran"}</h3>
-      <p>{isDe ? "Die gleichen IPTV Abos mit zwei Bildschirmen und angepasstem Preis für Haushalte mit mehreren Geräten." : "Les mêmes abonnements IPTV avec deux écrans et un prix adapté pour les foyers qui regardent sur plusieurs appareils."}</p>
-    </div>
-    <div class="multi-list">
-      {activeMultiPlans.map((plan) => (
-        <a id={plan.id} href={whatsappForPlan(plan.name)} class:list={["multi-row", { selected: plan.popular }]} aria-label={multiPlanLabel(plan.name)}>
-          <span>{plan.name}</span>
-          <span class="multi-price">
-            <span class="multi-price-top">
-              <strong>{plan.price}</strong>
-              <em>{plan.discount}</em>
-            </span>
-            <small>{monthlyPrice(plan.priceChf, plan.includedMonths)}</small>
-            {"note" in plan && plan.note ? <small>{plan.note}</small> : null}
-          </span>
-        </a>
-      ))}
+  <p class="guarantee">{isDe ? "48 Stunden Zufriedenheitsgarantie. Die Bestellung wird über WhatsApp vorbereitet; die Zahlung erfolgt erst nach den echten Zahlungsschritten." : "Garantie satisfait ou remboursé 48h. La demande est préparée via WhatsApp; le paiement suit uniquement les étapes de paiement réelles."}</p>
+
+  <div class="order-modal" id="order-modal" hidden>
+    <div class="order-backdrop" data-order-close></div>
+    <div class="order-dialog" role="dialog" aria-modal="true" aria-labelledby="order-title">
+      <button class="order-close" type="button" data-order-close aria-label={isDe ? "Formular schliessen" : "Fermer le formulaire"}>×</button>
+      <div class="section-title order-heading">
+        <p class="eyebrow">{isDe ? "Bestellung vorbereiten" : "Préparer la commande"}</p>
+        <h2 id="order-title">{isDe ? "IPTV Abo per WhatsApp bestellen" : "Commander votre abonnement IPTV via WhatsApp"}</h2>
+        <p>{isDe ? "Füllen Sie die Angaben aus. Danach öffnet WhatsApp mit Ihrer vorbereiteten Bestellung." : "Renseignez vos informations. WhatsApp s'ouvrira ensuite avec votre commande préparée."}</p>
+      </div>
+
+      <form class="order-form" id="order-form" novalidate>
+        <label>
+          <span>{isDe ? "E-Mail-Adresse" : "Adresse e-mail"}</span>
+          <input type="email" name="email" autocomplete="email" required placeholder="name@example.com" />
+        </label>
+
+        <label>
+          <span>{isDe ? "Ausgewähltes Abo" : "Abonnement sélectionné"}</span>
+          <select name="plan" required>
+            {orderPlans.map((plan) => <option value={plan.id}>{plan.name} - {plan.duration} - {plan.price}</option>)}
+          </select>
+        </label>
+
+        <label>
+          <span>{isDe ? "Anzahl" : "Quantité"}</span>
+          <input type="number" name="quantity" min="1" step="1" value="1" required />
+        </label>
+
+        <fieldset>
+          <legend>{isDe ? "Zahlungsmethode" : "Mode de paiement"}</legend>
+          <label><input type="radio" name="payment" value="PayPal" required /> PayPal</label>
+          <label><input type="radio" name="payment" value="Credit or debit card" /> {isDe ? "Kredit- oder Debitkarte" : "Carte de crédit ou de débit"}</label>
+          <label><input type="radio" name="payment" value="Bank transfer" /> {isDe ? "Banküberweisung" : "Virement bancaire"}</label>
+        </fieldset>
+
+        <div class="order-summary" aria-live="polite">
+          <div><span>{isDe ? "Abo" : "Abonnement"}</span><strong data-summary="name"></strong></div>
+          <div><span>{isDe ? "Dauer" : "Durée"}</span><strong data-summary="duration"></strong></div>
+          <div><span>{isDe ? "Einzelpreis" : "Prix unitaire"}</span><strong data-summary="unit"></strong></div>
+          <div><span>{isDe ? "Anzahl" : "Quantité"}</span><strong data-summary="quantity"></strong></div>
+          <div class="order-total"><span>{isDe ? "Total" : "Total"}</span><strong data-summary="total"></strong></div>
+        </div>
+
+        <p class="form-error" id="order-error" role="alert" hidden></p>
+        <button class="button primary" type="submit">{isDe ? "Weiter zu WhatsApp" : "Continuer vers WhatsApp"}</button>
+      </form>
     </div>
   </div>
-  <p class="guarantee">{isDe ? "48 Stunden Zufriedenheitsgarantie." : "Garantie satisfait ou remboursé 48h."}</p>
+
+  <script type="application/json" id="order-plan-data" set:html={JSON.stringify(orderPlans)} />
+  <script is:inline define:vars={{ whatsappNumber: site.whatsapp.replace(/\D/g, "") }}>
+    const orderModal = document.getElementById("order-modal");
+    const orderForm = document.getElementById("order-form");
+    const orderError = document.getElementById("order-error");
+    const planSelect = orderForm?.elements.namedItem("plan");
+    const quantityInput = orderForm?.elements.namedItem("quantity");
+    const planDataNode = document.getElementById("order-plan-data");
+    const orderPlans = planDataNode ? JSON.parse(planDataNode.textContent || "[]") : [];
+    const summary = {
+      name: document.querySelector('[data-summary="name"]'),
+      duration: document.querySelector('[data-summary="duration"]'),
+      unit: document.querySelector('[data-summary="unit"]'),
+      quantity: document.querySelector('[data-summary="quantity"]'),
+      total: document.querySelector('[data-summary="total"]'),
+    };
+
+    const formatChf = (amount) => `${amount} CHF`;
+    const selectedPlan = () => orderPlans.find((plan) => plan.id === planSelect?.value) || orderPlans[0];
+    const selectedQuantity = () => Math.max(1, Number.parseInt(quantityInput?.value || "1", 10) || 1);
+
+    const updateSummary = () => {
+      const plan = selectedPlan();
+      const quantity = selectedQuantity();
+      if (!plan) return;
+      if (summary.name) summary.name.textContent = plan.name;
+      if (summary.duration) summary.duration.textContent = plan.duration;
+      if (summary.unit) summary.unit.textContent = formatChf(plan.priceChf);
+      if (summary.quantity) summary.quantity.textContent = String(quantity);
+      if (summary.total) summary.total.textContent = formatChf(plan.priceChf * quantity);
+    };
+
+    const openOrder = (planId) => {
+      if (!orderModal || !orderForm || !planSelect) return;
+      planSelect.value = planId;
+      if (quantityInput) quantityInput.value = "1";
+      if (orderError) orderError.hidden = true;
+      updateSummary();
+      orderModal.hidden = false;
+      document.body.classList.add("modal-open");
+      orderForm.querySelector('input[name="email"]')?.focus();
+    };
+
+    const closeOrder = () => {
+      if (!orderModal) return;
+      orderModal.hidden = true;
+      document.body.classList.remove("modal-open");
+    };
+
+    document.querySelectorAll(".order-trigger").forEach((button) => {
+      button.addEventListener("click", () => openOrder(button.dataset.planId));
+    });
+    document.querySelectorAll("[data-order-close]").forEach((button) => button.addEventListener("click", closeOrder));
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !orderModal?.hidden) closeOrder();
+    });
+    planSelect?.addEventListener("change", updateSummary);
+    quantityInput?.addEventListener("input", updateSummary);
+
+    orderForm?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const formData = new FormData(orderForm);
+      const email = String(formData.get("email") || "").trim();
+      const payment = String(formData.get("payment") || "").trim();
+      const quantity = selectedQuantity();
+      const plan = selectedPlan();
+      const emailIsValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+      if (!plan || !emailIsValid || quantity < 1 || !Number.isInteger(quantity) || !payment) {
+        if (orderError) {
+          orderError.textContent = "Please enter a valid email address, quantity and payment method.";
+          orderError.hidden = false;
+        }
+        return;
+      }
+
+      const total = plan.priceChf * quantity;
+      const message = [
+        "Hello, I would like to order an IPTV subscription from swageiptv.net.",
+        "",
+        `Email address: ${email}`,
+        `Subscription: ${plan.name}`,
+        `Duration: ${plan.duration}`,
+        `Quantity: ${quantity}`,
+        `Unit price: ${plan.priceChf} CHF`,
+        `Total price: ${total} CHF`,
+        `Payment method: ${payment}`,
+        "",
+        "Thank you. Please let me know the steps required to complete my order.",
+      ].join("\n");
+
+      window.location.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+    });
+  </script>
 </section>
