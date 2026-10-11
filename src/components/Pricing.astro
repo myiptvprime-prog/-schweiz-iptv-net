@@ -104,7 +104,7 @@ const singlePlanLabel = (planName: string) =>
   </div>
 
   <script type="application/json" id="order-plan-data" set:html={JSON.stringify(orderPlans)} />
-  <script is:inline define:vars={{ whatsappNumber: site.whatsapp.replace(/\D/g, "") }}>
+  <script is:inline define:vars={{ whatsappNumber: site.whatsapp.replace(/\D/g, ""), isDe }}>
     const orderModal = document.getElementById("order-modal");
     const orderForm = document.getElementById("order-form");
     const orderError = document.getElementById("order-error");
@@ -173,26 +173,51 @@ const singlePlanLabel = (planName: string) =>
 
       if (!plan || !emailIsValid || quantity < 1 || !Number.isInteger(quantity) || !payment) {
         if (orderError) {
-          orderError.textContent = "Please enter a valid email address, quantity and payment method.";
+          orderError.textContent = isDe
+            ? "Bitte geben Sie eine gueltige E-Mail-Adresse, Anzahl und Zahlungsmethode ein."
+            : "Veuillez saisir une adresse e-mail valide, une quantite et un mode de paiement.";
           orderError.hidden = false;
         }
         return;
       }
 
+      const paymentLabel = isDe
+        ? {
+            "Credit or debit card": "Kredit- oder Debitkarte",
+            "Bank transfer": "Bankueberweisung",
+          }[payment] || payment
+        : {
+            "Credit or debit card": "Carte de credit ou de debit",
+            "Bank transfer": "Virement bancaire",
+          }[payment] || payment;
       const total = plan.priceChf * quantity;
-      const message = [
-        "Hello, I would like to order an IPTV subscription from swageiptv.net.",
-        "",
-        `Email address: ${email}`,
-        `Subscription: ${plan.name}`,
-        `Duration: ${plan.duration}`,
-        `Quantity: ${quantity}`,
-        `Unit price: ${plan.priceChf} CHF`,
-        `Total price: ${total} CHF`,
-        `Payment method: ${payment}`,
-        "",
-        "Thank you. Please let me know the steps required to complete my order.",
-      ].join("\n");
+      const message = isDe
+        ? [
+            "Hallo, ich moechte ein IPTV Abo von swageiptv.net bestellen.",
+            "",
+            `E-Mail-Adresse: ${email}`,
+            `Abo: ${plan.name}`,
+            `Dauer: ${plan.duration}`,
+            `Anzahl: ${quantity}`,
+            `Einzelpreis: ${plan.priceChf} CHF`,
+            `Gesamtpreis: ${total} CHF`,
+            `Zahlungsmethode: ${paymentLabel}`,
+            "",
+            "Vielen Dank. Bitte senden Sie mir die naechsten Schritte zur Bestellung.",
+          ].join("\n")
+        : [
+            "Bonjour, je souhaite commander un abonnement IPTV depuis swageiptv.net.",
+            "",
+            `Adresse e-mail: ${email}`,
+            `Abonnement: ${plan.name}`,
+            `Duree: ${plan.duration}`,
+            `Quantite: ${quantity}`,
+            `Prix unitaire: ${plan.priceChf} CHF`,
+            `Prix total: ${total} CHF`,
+            `Mode de paiement: ${paymentLabel}`,
+            "",
+            "Merci de m'indiquer les prochaines etapes pour finaliser ma commande.",
+          ].join("\n");
 
       window.location.href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
     });
