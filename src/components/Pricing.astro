@@ -2,7 +2,13 @@
 import { singleScreenPlans, site } from "../data/site";
 import { deSingleScreenPlans } from "../data/de";
 
+interface Props {
+  variant?: "fr-home";
+}
+
+const { variant } = Astro.props;
 const isDe = !Astro.url.pathname.startsWith("/fr/");
+const isFrenchHomePricing = variant === "fr-home" && !isDe;
 const activeSinglePlans = isDe ? deSingleScreenPlans : singleScreenPlans;
 const orderPlans = activeSinglePlans.map((plan) => ({
   id: plan.id,
@@ -18,7 +24,7 @@ const singlePlanLabel = (planName: string) =>
   isDe ? `IPTV Abo bestellen: ${planName}` : `Commander cet abonnement IPTV: ${planName}`;
 ---
 
-<section class="section pricing" id="abonnements">
+<section class:list={["section", "pricing", { "fr-home-pricing": isFrenchHomePricing }]} id="abonnements">
   <div class="section-title">
     <p class="eyebrow">{isDe ? "IPTV Abos Schweiz" : "Nos abonnements Schweiz IPTV"}</p>
     <h2>{isDe ? "IPTV Abo Schweiz: Angebote in CHF" : "Abonnements IPTV Suisse en CHF"}</h2>

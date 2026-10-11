@@ -8,9 +8,9 @@ import Reviews from "../../components/Reviews.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { faq, singleScreenPlans, site } from "../../data/site";
 
-const title = "IPTV Suisse: IPTV Abonnement +39 000 chaînes FHD/HD/4K";
+const title = "IPTV Suisse: Abonnement IPTV en français +39 000 chaînes";
 const description =
-  "IPTV Suisse: abonnement IPTV avec +39 000 chaînes FHD/HD/4K, replay et VOD inclus. Activation instantanée, support 24/7 et offres dès 25 CHF.";
+  "IPTV Suisse: abonnement IPTV en français avec +39 000 chaînes FHD/HD/4K, replay et VOD inclus. Activation instantanée, support 24/7 et offres dès 25 CHF.";
 const imageAlt =
   "IPTV Suisse sur Smart TV: abonnement Schweiz IPTV avec chaînes suisses, HD, 4K, replay et VOD";
 const schema = {
@@ -63,7 +63,7 @@ const schema = {
   <Header />
 
   <main>
-    <section class="hero" id="accueil">
+    <section class="hero fr-home-hero" id="accueil">
       <picture>
         <source
           type="image/webp"
@@ -88,7 +88,7 @@ const schema = {
       <div class="hero-overlay"></div>
       <div class="hero-content">
         <p class="eyebrow">IPTV Suisse romande</p>
-        <h1>IPTV Suisse: abonnement en français pour tous vos appareils</h1>
+        <h1><span class="hero-title-accent">IPTV Suisse</span><span class="hero-title-main">Abonnement IPTV en français pour tous vos appareils</span></h1>
         <p class="hero-copy">
           Choisissez un abonnement IPTV Suisse en CHF avec serveur Premium, replay, VOD, qualité HD, FHD et 4K, plus un support 24/7 par WhatsApp.
         </p>
@@ -99,7 +99,7 @@ const schema = {
     </section>
 
     <Features />
-    <Pricing />
+    <Pricing variant="fr-home" />
     <Reviews />
     <HomeSeoSections />
   </main>
